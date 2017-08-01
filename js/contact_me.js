@@ -10,6 +10,7 @@ $(function() {
         submitSuccess: function($form, event) {
             event.preventDefault(); // prevent default submit behaviour
             // get values from FORM
+            debugger;
             var name = $("input#name").val();
             var email = $("input#email").val();
             var phone = $("input#phone").val();
@@ -20,14 +21,11 @@ $(function() {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
             $.ajax({
-                url: "././mail/contact_me.php",
+                url: "https://hooks.slack.com/services/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",
                 type: "POST",
-                data: {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    message: message
-                },
+                data: JSON.stringify({
+                    "text": "Name: " + name + "\n" + "Email: " + email + "\n" + "Phone: " + phone + "\n" + "Message: " + message + "\n\n\n"
+                }),
                 cache: false,
                 success: function() {
                     // Success message
